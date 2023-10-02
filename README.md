@@ -10,7 +10,7 @@ The **Desktop Productivity To Do List** is a simple desktop application built wi
 
 - **Background Operation:** The app seamlessly runs in the background, ensuring it's always ready to assist you without interrupting your workflow.
 
-- **Task Reminders:** Add and manage your daily tasks and receive timely reminders to stay on top of your to-do list.
+- **Task Persistence:** Add and manage your daily tasks to be persistent whenever your computer restarts or shuts down.
 
 - **Minimalistic UI:** The app features an intuitive and minimalistic user interface, making it easy to navigate and use.
 
