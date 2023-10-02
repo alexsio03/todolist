@@ -1,6 +1,6 @@
 # Desktop Productivity To Do List
 
-![App Screenshot](screenshot.png)
+![App Screenshot](todolistscreenshot.png)
 
 ## Description
 
