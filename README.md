@@ -18,12 +18,12 @@ The **Desktop Productivity To Do List** is a simple desktop application built wi
 
 ## Installation
 
-To get started with the Desktop Productivity Assistant, follow these steps:
+To get started with the to do list, follow these steps:
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/desktop-productivity-assistant.git
+   git clone https://github.com/alexsio03/todolist.git
 
 2. Install dependencies:
 
@@ -45,7 +45,7 @@ To get started with the Desktop Productivity Assistant, follow these steps:
 
 ## Contributing
 
-Contributions are welcome! If you have any ideas for improving the to do list or want to report a bug, please open an issue or submit a pull request. For major changes, please discuss your ideas in the [Discussions](https://github.com/yourusername/desktop-productivity-assistant/discussions) section.
+Contributions are welcome! If you have any ideas for improving the to do list or want to report a bug, please open an issue or submit a pull request. For major changes, please discuss your ideas in the [Discussions](https://github.com/alexsio03/todolist/discussions) section.
 
 ## License
 
