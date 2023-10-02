@@ -41,7 +41,7 @@ To get started with the to do list, follow these steps:
 
 - Click on the app icon in your system tray to open the task management interface.
 
-- Add your daily tasks, set reminders, and customize todays task as needed.
+- Add, remove, and edit your daily tasks, and customize todays task as needed.
 
 ## Contributing
 
