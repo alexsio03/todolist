@@ -47,10 +47,6 @@ To get started with the to do list, follow these steps:
 
 Contributions are welcome! If you have any ideas for improving the to do list or want to report a bug, please open an issue or submit a pull request. [Issues](https://github.com/alexsio03/todolist/issues)
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Acknowledgments
 
 The Desktop Productivity Assistant was created with love by [Alex Warda](https://github.com/alexsio03). Special thanks to the open-source community and the following libraries and frameworks that made this project possible:
