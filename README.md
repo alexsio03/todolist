@@ -49,7 +49,7 @@ Contributions are welcome! If you have any ideas for improving the to do list or
 
 ## Acknowledgments
 
-The Desktop Productivity Assistant was created with love by [Alex Warda](https://github.com/alexsio03). Special thanks to the open-source community and the following libraries and frameworks that made this project possible:
+The Desktop Productivity To Do List was created with love by [Alex Warda](https://github.com/alexsio03). Special thanks to the open-source community and the following libraries and frameworks that made this project possible:
 
 - [Electron](https://www.electronjs.org/)
 - [React](https://reactjs.org/)
