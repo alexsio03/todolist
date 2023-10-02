@@ -49,7 +49,8 @@ body {
 .today li {
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: 12px;
+  color: #70331d;
   margin-bottom: 10px;
   border-bottom: 1px solid #ccc; /* Add a border under each task item */
   padding-bottom: 5px; /* Add padding for spacing between tasks */

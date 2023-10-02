@@ -11,21 +11,26 @@ async function handleFileOpen () {
       console.error(err)
       return
     }
-    console.log(data)
     mainWindow.webContents.send('haveData', data)
   })
 }
 
-function handleSaveFile (event, newData) {
-  console.log(newData)
+function handleSaveFile(event, newData) {
+  const formattedData = { tasks: newData.map((task) => task) };
+  try {
+    fs.writeFileSync('./public/daily.json', JSON.stringify(formattedData, null, 2), 'utf-8');
+    console.log('Data saved successfully.');
+  } catch (error) {
+    console.error('Error saving data:', error);
+  }
 }
 
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 300,
-    height: 600,
+    height: 800,
     x: 1500,
-    y: 250,
+    y: 100,
     webPreferences: {
       nodeIntegration: true,
       preload: path.join(__dirname, 'preload.js')

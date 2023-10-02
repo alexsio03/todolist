@@ -31,8 +31,29 @@ function App() {
   const handleAddDailyTask = (event) => {
     event.preventDefault();
     if (dailyTaskInput.trim() !== '') {
-      setDailyTasks([...dailyTasks, { text: dailyTaskInput, completed: false }]);
+      const newTask = { text: dailyTaskInput, completed: false };
+      const updatedTasks = [...dailyTasks, newTask];
+      setDailyTasks(updatedTasks);
+      saveDailyTasksToFile(updatedTasks);
       setDailyTaskInput('');
+    }
+  };
+  
+  const handleRemoveDailyTask = (index) => {
+    const updatedTasks = [...dailyTasks];
+    updatedTasks.splice(index, 1);
+    setDailyTasks(updatedTasks);
+    saveDailyTasksToFile(updatedTasks);
+  };
+  
+  const saveDailyTasksToFile = (tasks) => {
+    try {
+      // Convert the tasks to the desired format (array of strings)
+      const formattedTasks = tasks.map((task) => task.text);
+      // Save the formatted tasks to the file
+      window.electronAPI.saveFile(formattedTasks)
+    } catch (error) {
+      console.error('Error saving daily tasks:', error);
     }
   };
 
@@ -42,12 +63,6 @@ function App() {
       setTodaysTasks([...todaysTasks, { text: todaysTaskInput, completed: false }]);
       setTodaysTaskInput('');
     }
-  };
-
-  const handleRemoveDailyTask = (index) => {
-    const updatedTasks = [...dailyTasks];
-    updatedTasks.splice(index, 1);
-    setDailyTasks(updatedTasks);
   };
 
   const handleRemoveTodaysTask = (index) => {
@@ -68,13 +83,13 @@ function App() {
     setTodaysTasks(updatedTasks);
   };
 
-  const handleSF = async () => {
-    await window.electronAPI.saveFile(dailyTasks);
-  }
+  // const handleSF = async () => {
+  //   await window.electronAPI.saveFile(dailyTasks);
+  // }
 
   return (
     <div className='outer'>
-      <button onClick={() => handleSF()} type="button" id="btn">Save to File</button>
+      {/* <button onClick={() => handleSF()} type="button" id="btn">Save to File</button> */}
       <div className='daily'>
         <h2>Daily Tasks</h2>
         <ul className='tasklist'>

@@ -1,7 +1,12 @@
 {
-    "tasks": [
-        "task 1",
-        "task 2",
-        "task 3"
-    ]
+  "tasks": [
+    "Check Canvas/Do Homework",
+    "Read 30 Mins",
+    "10 Mins Duolingo",
+    "10 LinkedIn internships",
+    "10 Handshake internships",
+    "10 Miscellaneous internships",
+    "5 Leetcode Problems",
+    "1 Chapter review CTCI"
+  ]
 }
