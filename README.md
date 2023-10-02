@@ -28,7 +28,7 @@ To get started with the to do list, follow these steps:
 2. Install dependencies:
 
    ```bash
-   cd desktop-productivity-assistant
+   cd todolist
    npm install
 
 3. Run the app:
