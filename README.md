@@ -45,7 +45,7 @@ To get started with the to do list, follow these steps:
 
 ## Contributing
 
-Contributions are welcome! If you have any ideas for improving the to do list or want to report a bug, please open an issue or submit a pull request. For major changes, please discuss your ideas in the [Discussions](https://github.com/alexsio03/todolist/discussions) section.
+Contributions are welcome! If you have any ideas for improving the to do list or want to report a bug, please open an issue or submit a pull request. [Issues](https://github.com/alexsio03/todolist/issues)
 
 ## License
 
