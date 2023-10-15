@@ -5,8 +5,15 @@ const fs = require('fs');
 let mainWindow;
 let tray;
 
+const filePath = path.join('../../daily.json');
+if (!fs.existsSync(filePath)) {
+  // If the file doesn't exist, create it with some initial data
+  const initialData = { tasks: [] };
+  fs.writeFileSync(filePath, JSON.stringify(initialData, null, 2), 'utf-8');
+}
+
 async function handleFileOpen () {
-  fs.readFile('./public/daily.json', 'utf8' , (err, data) => {
+  fs.readFile(filePath, 'utf8' , (err, data) => {
     if (err) {
       console.error(err)
       return
@@ -18,7 +25,7 @@ async function handleFileOpen () {
 function handleSaveFile(event, newData) {
   const formattedData = { tasks: newData.map((task) => task) };
   try {
-    fs.writeFileSync('./public/daily.json', JSON.stringify(formattedData, null, 2), 'utf-8');
+    fs.writeFileSync(filePath, JSON.stringify(formattedData, null, 2), 'utf-8');
     console.log('Data saved successfully.');
   } catch (error) {
     console.error('Error saving data:', error);
@@ -43,11 +50,8 @@ function createWindow() {
   // Hide the taskbar icon
   mainWindow.setSkipTaskbar(true);
 
-  setTimeout(() => {
-    console.log('Waiting for localhost:3000 to load...');
-  }, 10000);
   // Load the index.html from a URL
-  mainWindow.loadURL('http://localhost:3000');
+  mainWindow.loadFile("./build/index.html");
 
   // Create a tray icon
   tray = new Tray(path.join(__dirname, './favicon.ico')); // Replace with the path to your icon image

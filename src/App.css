@@ -78,11 +78,11 @@ body {
 .today button {
   background-color: transparent;
   border: none;
-  color: red;
+  color: rgb(110, 14, 14);
   font-size: 18px;
   cursor: pointer;
   padding: 0;
-  margin-left: auto;
+  margin-left: 1;
   opacity: 0; /* Initially hide the button */
   transition: opacity 0.2s; /* Add a smooth fade-in effect */
 }

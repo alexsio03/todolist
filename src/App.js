@@ -1,11 +1,34 @@
 import React, { useState, useEffect } from 'react';
+import EditIcon from '@mui/icons-material/Edit';
+import ClearIcon from '@mui/icons-material/Clear';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import './App.css';
 
 function App() {
-  const [dailyTasks, setDailyTasks] = useState([]);
+  const [dailyTasks, setDailyTasks] = useState([{ text: '', completed: false, editing: false }]);
   const [todaysTasks, setTodaysTasks] = useState([]);
   const [dailyTaskInput, setDailyTaskInput] = useState('');
   const [todaysTaskInput, setTodaysTaskInput] = useState('');
+
+  const handleEditTaskClick = (index) => {
+    const updatedTasks = [...dailyTasks];
+    updatedTasks[index].editing = !updatedTasks[index].editing;
+    setDailyTasks(updatedTasks);
+  };
+
+  const handleEditTask = (index, newText) => {
+    const updatedTasks = [...dailyTasks];
+    updatedTasks[index].text = newText;
+    updatedTasks[index].editing = false;
+    setDailyTasks(updatedTasks);
+  };
+
+  const handleEditTaskChange = (index, newText) => {
+    const updatedTasks = [...dailyTasks];
+    updatedTasks[index].text = newText;
+    setDailyTasks(updatedTasks);
+  };
 
   // Function to load daily tasks from a file
   const loadDailyTasksFromFile = async () => {
@@ -83,25 +106,50 @@ function App() {
     setTodaysTasks(updatedTasks);
   };
 
-  // const handleSF = async () => {
-  //   await window.electronAPI.saveFile(dailyTasks);
-  // }
+  const moveTaskUp = (index) => {
+    if (index === 0) return; // Task is already at the top
+    const updatedTasks = [...dailyTasks];
+    const temp = updatedTasks[index];
+    updatedTasks[index] = updatedTasks[index - 1];
+    updatedTasks[index - 1] = temp;
+    setDailyTasks(updatedTasks);
+  };
+  
+  const moveTaskDown = (index) => {
+    if (index === dailyTasks.length - 1) return; // Task is already at the bottom
+    const updatedTasks = [...dailyTasks];
+    const temp = updatedTasks[index];
+    updatedTasks[index] = updatedTasks[index + 1];
+    updatedTasks[index + 1] = temp;
+    setDailyTasks(updatedTasks);
+  };
 
   return (
     <div className='outer'>
       {/* <button onClick={() => handleSF()} type="button" id="btn">Save to File</button> */}
       <div className='daily'>
-        <h2>Daily Tasks</h2>
+        <h2>Daily Task</h2>
         <ul className='tasklist'>
           {dailyTasks.map((task, index) => (
             <li key={index} className={task.completed ? 'completed' : ''}>
+              <button onClick={() => moveTaskUp(index)}><ArrowUpwardIcon fontSize="small" /></button>
+              <button onClick={() => moveTaskDown(index)}><ArrowDownwardIcon fontSize="small" /></button>
               <input
                 type='checkbox'
                 checked={task.completed}
                 onChange={() => handleToggleDailyTask(index)}
               />
-              {task.text}
-              <button onClick={() => handleRemoveDailyTask(index)}>X</button>
+              {task.editing ? (
+                <input
+                  type="text"
+                  value={task.text}
+                  onChange={(e) => handleEditTaskChange(index, e.target.value)}
+                />
+              ) : (
+                task.text
+              )}
+              <button onClick={() => handleEditTaskClick(index)}><EditIcon fontSize="small" /></button>
+              <button onClick={() => handleRemoveDailyTask(index)}><ClearIcon fontSize="small" /></button>
             </li>
           ))}
         </ul>
