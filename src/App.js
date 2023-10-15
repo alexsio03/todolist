@@ -148,8 +148,10 @@ function App() {
               ) : (
                 task.text
               )}
-              <button onClick={() => handleEditTaskClick(index)}><EditIcon fontSize="small" /></button>
-              <button onClick={() => handleRemoveDailyTask(index)}><ClearIcon fontSize="small" /></button>
+              <div className="right-buttons">
+                <button onClick={() => handleEditTaskClick(index)}><EditIcon fontSize="small" /></button>
+                <button onClick={() => handleRemoveDailyTask(index)}><ClearIcon fontSize="small" /></button>
+              </div>
             </li>
           ))}
         </ul>

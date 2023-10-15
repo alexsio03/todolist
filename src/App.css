@@ -73,6 +73,11 @@ body {
   margin-right: 10px;
 }
 
+.right-buttons {
+  display: flex;
+  margin-left: auto;
+}
+
 /* Style the 'X' button within task items */
 .daily button,
 .today button {
@@ -83,6 +88,7 @@ body {
   cursor: pointer;
   padding: 0;
   margin-left: 1;
+  position: relative;
   opacity: 0; /* Initially hide the button */
   transition: opacity 0.2s; /* Add a smooth fade-in effect */
 }
