@@ -34,9 +34,9 @@ function handleSaveFile(event, newData) {
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 300,
+    width: 360,
     height: 800,
-    x: 1500,
+    x: 1440,
     y: 100,
     webPreferences: {
       nodeIntegration: true,

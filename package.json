@@ -1,6 +1,6 @@
 {
   "name": "todolist",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "private": true,
   "author": "alexsio",
   "description": "A simple todolist app",
@@ -27,7 +27,7 @@
     "electron-build": "electron-builder",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron-dev": "electron ."
+    "dev": "electron ."
   },
   "build": {
     "appId": "todolist",
