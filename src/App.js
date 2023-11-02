@@ -11,23 +11,35 @@ function App() {
   const [dailyTaskInput, setDailyTaskInput] = useState('');
   const [todaysTaskInput, setTodaysTaskInput] = useState('');
 
-  const handleEditTaskClick = (index) => {
-    const updatedTasks = [...dailyTasks];
+  const handleEditTaskClick = (index, day) => {
+    let updatedTasks = []
+    if(day === "today") {
+      updatedTasks = [...todaysTasks];
+    } else {
+      updatedTasks = [...dailyTasks];
+    }
     updatedTasks[index].editing = !updatedTasks[index].editing;
-    setDailyTasks(updatedTasks);
+    if(day === "daily") {
+      setDailyTasks(updatedTasks);
+      saveDailyTasksToFile(updatedTasks)
+    } else {
+      setTodaysTasks(updatedTasks);
+    }
   };
 
-  const handleEditTask = (index, newText) => {
-    const updatedTasks = [...dailyTasks];
+  const handleEditTaskChange = (index, newText, day) => {
+    let updatedTasks = []
+    if(day === "today") {
+      updatedTasks = [...todaysTasks];
+    } else {
+      updatedTasks = [...dailyTasks];
+    }
     updatedTasks[index].text = newText;
-    updatedTasks[index].editing = false;
-    setDailyTasks(updatedTasks);
-  };
-
-  const handleEditTaskChange = (index, newText) => {
-    const updatedTasks = [...dailyTasks];
-    updatedTasks[index].text = newText;
-    setDailyTasks(updatedTasks);
+    if(day === "daily") {
+      setDailyTasks(updatedTasks);
+    } else {
+      setTodaysTasks(updatedTasks);
+    }
   };
 
   // Function to load daily tasks from a file
@@ -106,22 +118,44 @@ function App() {
     setTodaysTasks(updatedTasks);
   };
 
-  const moveTaskUp = (index) => {
+  const moveTaskUp = (index, day) => {
     if (index === 0) return; // Task is already at the top
-    const updatedTasks = [...dailyTasks];
+    let updatedTasks = []
+    if(day === "today") {
+      updatedTasks = [...todaysTasks];
+    } else {
+      updatedTasks = [...dailyTasks];
+    }
     const temp = updatedTasks[index];
     updatedTasks[index] = updatedTasks[index - 1];
     updatedTasks[index - 1] = temp;
-    setDailyTasks(updatedTasks);
+    if(day === "daily") {
+      setDailyTasks(updatedTasks);
+      saveDailyTasksToFile(updatedTasks)
+    } else {
+      setTodaysTasks(updatedTasks);
+    }
   };
   
-  const moveTaskDown = (index) => {
-    if (index === dailyTasks.length - 1) return; // Task is already at the bottom
-    const updatedTasks = [...dailyTasks];
+  const moveTaskDown = (index, day) => {
+     // Task is already at the bottom
+    let updatedTasks = []
+    if(day === "today") {
+      if (index === todaysTasks.length - 1) return;
+      updatedTasks = [...todaysTasks];
+    } else {
+      if (index === dailyTasks.length - 1) return;
+      updatedTasks = [...dailyTasks];
+    }
     const temp = updatedTasks[index];
     updatedTasks[index] = updatedTasks[index + 1];
     updatedTasks[index + 1] = temp;
-    setDailyTasks(updatedTasks);
+    if(day === "daily") {
+      setDailyTasks(updatedTasks);
+      saveDailyTasksToFile(updatedTasks)
+    } else {
+      setTodaysTasks(updatedTasks);
+    }
   };
 
   return (
@@ -132,8 +166,8 @@ function App() {
         <ul className='tasklist'>
           {dailyTasks.map((task, index) => (
             <li key={index} className={task.completed ? 'completed' : ''}>
-              <button onClick={() => moveTaskUp(index)}><ArrowUpwardIcon fontSize="small" /></button>
-              <button onClick={() => moveTaskDown(index)}><ArrowDownwardIcon fontSize="small" /></button>
+              <button onClick={() => moveTaskUp(index, "daily")}><ArrowUpwardIcon fontSize="small" /></button>
+              <button onClick={() => moveTaskDown(index, "daily")}><ArrowDownwardIcon fontSize="small" /></button>
               <input
                 type='checkbox'
                 checked={task.completed}
@@ -143,13 +177,13 @@ function App() {
                 <input
                   type="text"
                   value={task.text}
-                  onChange={(e) => handleEditTaskChange(index, e.target.value)}
+                  onChange={(e) => handleEditTaskChange(index, e.target.value, "daily")}
                 />
               ) : (
                 task.text
               )}
               <div className="right-buttons">
-                <button onClick={() => handleEditTaskClick(index)}><EditIcon fontSize="small" /></button>
+                <button onClick={() => handleEditTaskClick(index, "daily")}><EditIcon fontSize="small" /></button>
                 <button onClick={() => handleRemoveDailyTask(index)}><ClearIcon fontSize="small" /></button>
               </div>
             </li>
@@ -170,13 +204,26 @@ function App() {
         <ul className='tasklist'>
           {todaysTasks.map((task, index) => (
             <li key={index} className={task.completed ? 'completed' : ''}>
+              <button onClick={() => moveTaskUp(index, "today")}><ArrowUpwardIcon fontSize="small" /></button>
+              <button onClick={() => moveTaskDown(index, "today")}><ArrowDownwardIcon fontSize="small" /></button>
               <input
                 type='checkbox'
                 checked={task.completed}
                 onChange={() => handleToggleTodaysTask(index)}
               />
-              {task.text}
-              <button onClick={() => handleRemoveTodaysTask(index)}>X</button>
+              {task.editing ? (
+                <input
+                  type="text"
+                  value={task.text}
+                  onChange={(e) => handleEditTaskChange(index, e.target.value, "today")}
+                />
+              ) : (
+                task.text
+              )}
+              <div className="right-buttons">
+                <button onClick={() => handleEditTaskClick(index, "today")}><EditIcon fontSize="small" /></button>
+                <button onClick={() => handleRemoveTodaysTask(index)}><ClearIcon fontSize="small" /></button>
+              </div>
             </li>
           ))}
         </ul>
